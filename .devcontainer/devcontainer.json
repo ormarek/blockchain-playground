@@ -1,0 +1,21 @@
+{
+  "name": "blockchain-playground",
+  "dockerComposeFile": "compose.yml",
+  "service": "workspace",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "grapecity.gc-excelviewer",
+        "gruntfuggly.todo-tree",
+        "redhat.vscode-yaml",
+        "ms-python.python"
+      ]
+    }
+  },
+  "forwardPorts": [
+    27017
+  ],
+  "postCreateCommand": ""
+}

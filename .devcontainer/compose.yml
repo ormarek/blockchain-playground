@@ -1,0 +1,9 @@
+# Built based on: https://github.com/microsoft/vscode-dev-containers/tree/main/containers/javascript-node-mongo/.devcontainer
+services:
+  workspace:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
