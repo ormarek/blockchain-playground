@@ -7,11 +7,12 @@
     "vscode": {
       "settings": {},
       "extensions": [
-        "grapecity.gc-excelviewer",
-        "gruntfuggly.todo-tree",
-        "redhat.vscode-yaml",
-        "ms-python.python"
-      ]
+		"grapecity.gc-excelviewer",
+		"gruntfuggly.todo-tree",
+		"redhat.vscode-yaml",
+		"ms-python.python",
+		"rangav.vscode-thunder-client"
+	]
     }
   },
   "forwardPorts": [
