@@ -7,7 +7,7 @@ ENV PYTHONFAULTHANDLER=1 \
   PIP_NO_CACHE_DIR=off \
   PIP_DISABLE_PIP_VERSION_CHECK=on \
   PIP_DEFAULT_TIMEOUT=100 \
-  POETRY_VERSION=1.6
+  POETRY_VERSION=">=1.6,<1.7"
 
 # Install system dependencies
 RUN apt-get update -y && apt-get upgrade -y
@@ -25,7 +25,7 @@ RUN echo "export PATH=\"$HOME/.local/bin:$PATH\"" >> ~/.bashrc
 RUN echo "alias python='python3'" >> ~/.bashrc
 RUN echo "alias pip='pip3'" >> ~/.bashrc
 
-RUN pip install "poetry==$POETRY_VERSION"
+RUN pip install "poetry$POETRY_VERSION"
 RUN poetry config virtualenvs.in-project true
 
 # Install Git
