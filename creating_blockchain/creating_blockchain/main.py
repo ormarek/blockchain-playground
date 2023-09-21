@@ -1,56 +1,59 @@
 import datetime, hashlib, json
 from flask import Flask, jsonify
 
+import datetime
+import hashlib
+import json
+from typing import List, Dict, Union
+
 class Blockchain:
     def __init__(self) -> None:
-        self.chain = []
-        self.create_block(proof = 1, prev_hash = None)
+        self.chain: List[Dict[str, Union[int, str]]] = []
+        self.create_block(proof=1, previous_hash=None)
 
-    def create_block(self, proof, prev_hash):
-        block = {'index': len(self.chain) + 1,
-                 'timestamp': str(datetime.datetime.now()),
-                 'proof': proof,
-                 'prev_hash': prev_hash}
+    def create_block(self, proof: int, previous_hash: str) -> Dict[str, Union[int, str]]:
+        block = {
+            'index': len(self.chain) + 1,
+            'timestamp': str(datetime.datetime.now()),
+            'proof': proof,
+            'previous_hash': previous_hash
+        }
         self.chain.append(block)
         return block
     
-    def get_previous_block(self):
-        return self.chain(-1)
+    def get_first_block(self) -> Dict[str, Union[int, str]]:
+        return self.chain[0]
     
-    def proof_of_work(self, prev_proof):
+    def get_last_block(self) -> Dict[str, Union[int, str]]:
+        return self.chain[-1]
+    
+    def _is_proof_valid(self, new_proof: int, previous_proof: int) -> bool:
+        hash_operation = hashlib.sha256(f"{new_proof**2 - previous_proof**2}".encode()).hexdigest()
+        return hash_operation[:4] == '0000'
+    
+    def proof_of_work(self, previous_proof: int) -> int:
         new_proof = 1
-        check_proof = False
-
-        while check_proof == False:
-            hash_operation = hashlib.sha256(str(new_proof**2 - prev_proof**2).encode()).hexdigest()
-            if hash_operation[:4] == '0000':
-                check_proof = True
-            else:
-                new_proof += 1
+        while not self._is_proof_valid(new_proof, previous_proof):
+            new_proof += 1
         return new_proof
     
-    def hash(self, block):
-        encoded_block = json.dumps(block, sort_keys = True).encode()
+    def hash(self, block: Dict[str, Union[int, str]]) -> str:
+        encoded_block = json.dumps(block, sort_keys=True).encode()
         return hashlib.sha256(encoded_block).hexdigest()
     
-    def is_chain_valid(self, chain):
-        prefious_block = chain[0]
-        block_index = 1
+    def is_chain_valid(self, chain: List[Dict[str, Union[int, str]]]) -> bool:
+        previous_block = self.get_first_block()
 
-        while block_index < len(chain):
-            block = chain[block_index]
-            if block['previous_hash'] != self.hash(prefious_block):
+        for current_block in chain[1:]:
+            if current_block['previous_hash'] != self.hash(previous_block):
                 return False
             
-            prev_proof = prefious_block['proof']
-            proof = block['proof']
-            hash_operation = hashlib.sha256(str(proof**2 - prev_proof**2).encode()).hexdigest()
-            if hash_operation[:4] != '0000':
+            if not self._is_proof_valid(current_block['proof'], previous_block['proof']):
                 return False
-            prev_proof = block
-            block_index += 1
-        return True
 
+            previous_block = current_block
+
+        return True
 
 def main():
     print('Hello world!')
