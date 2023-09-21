@@ -15,4 +15,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-blockchain = "creating_blockchain.main:main"
+start = "creating_blockchain.main:main"

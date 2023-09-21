@@ -1,0 +1,37 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Blockchain",
+    "dateExported": "2023-09-21T17:15:16.898Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "175205dc-a9ff-45df-a780-abab43e2cee7",
+            "colId": "219e1cca-e70d-4c3f-b005-63f8f1b69f29",
+            "containerId": "",
+            "name": "Get Chain",
+            "url": "localhost:5000/get_chain",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-09-21T17:12:10.132Z",
+            "modified": "2023-09-21T17:12:10.132Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "f2e7c8fa-db1f-4ed5-b4d1-e7b51eb889ef",
+            "colId": "219e1cca-e70d-4c3f-b005-63f8f1b69f29",
+            "containerId": "",
+            "name": "Mine Block",
+            "url": "localhost:5000/mine_block",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-09-21T17:14:22.944Z",
+            "modified": "2023-09-21T17:14:22.944Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
